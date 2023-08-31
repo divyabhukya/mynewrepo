@@ -1,0 +1,15 @@
+---
+- name: Create Directory on Remote Host
+  hosts: 172.16.0.236  # Replace with the name of your host group
+  tasks:
+    - name: Business
+      become: yes  # This allows the task to run with elevated privileges
+      file:
+        path: /home/divya  # Specify the directory path
+        state: directory
+        mode: '0755'  # Specify desired permissions for the directory
+      register: dir_result
+
+    - name: Display directory creation status
+      debug:
+        var: dir_result
