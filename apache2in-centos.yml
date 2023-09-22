@@ -1,0 +1,16 @@
+---
+- name: Install Apache2 on CentOS 7
+  hosts: 172.16.0.194
+  become: yes
+  tasks:
+    - name: Update YUM package manager
+      yum:
+        name: '*'
+        state: latest
+      register: update_result
+      changed_when: update_result is changed
+
+    - name: Install Apache2
+      yum:
+        name: httpd
+        state: present
