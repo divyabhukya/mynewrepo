@@ -1,0 +1,21 @@
+
+        ---
+- name: Install Nginx on Ubuntu
+  hosts: 172.16.0.113
+  become: yes
+  tasks:
+    - name: Update APT package cache
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == 'Debian'
+    - name: Ensure Nginx is running and enabled
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+        
